@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ account.first_name }} {{ account.last_name }}</h1>
+        <p>Class: {{ account.class_name }}</p>
+        <h2>Your Modules and Marks</h2>
+        <ul>
+            {% for module in modules %}
+                <li>{{ module.module_name }}: {{ module.mark }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</body>
+</html>

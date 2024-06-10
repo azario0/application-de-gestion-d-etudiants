@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <form method="POST" action="/admin">
+            <div>
+                <label for="class_id">Select Class:</label>
+                <select name="class_id" id="class_id">
+                    {% for class in classes %}
+                        <option value="{{ class.class_id }}" {% if selected_class == class.class_id %}selected{% endif %}>{{ class.class_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="module_name">Select Module:</label>
+                <select name="module_name" id="module_name">
+                    <option value="Math" {% if selected_module == "Math" %}selected{% endif %}>Math</option>
+                    <option value="Algebra" {% if selected_module == "Algebra" %}selected{% endif %}>Algebra</option>
+                    <option value="AI" {% if selected_module == "AI" %}selected{% endif %}>AI</option>
+                    <option value="Calculus" {% if selected_module == "Calculus" %}selected{% endif %}>Calculus</option>
+                </select>
+            </div>
+            <button type="submit">Show Students</button>
+        </form>
+        
+        <h2>Students and Marks</h2>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Mark</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.first_name }}</td>
+                <td>{{ student.last_name }}</td>
+                <td>{{ student.mark }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+</body>
+</html>
